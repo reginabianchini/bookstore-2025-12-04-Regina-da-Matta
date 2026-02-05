@@ -5,6 +5,14 @@ import java.util.Scanner;
 public class Foundation extends MakeupProduct{
     private String coverage;
 
+    public Foundation(String superFoundation, double v) {
+        super();
+    }
+
+    public Foundation() {
+
+    }
+
     @Override
     public void initialize(Scanner input) {
         super.initialize(input);
@@ -38,5 +46,9 @@ public class Foundation extends MakeupProduct{
     @Override
     public int hashCode() {
         return Objects.hash(super.hashCode(), coverage);
+    }
+
+    public String getFoundationCoverage() {
+        return
     }
 }
