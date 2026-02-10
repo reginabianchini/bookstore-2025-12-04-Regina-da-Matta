@@ -1,4 +1,5 @@
 package csd214.bookstore.pojos;
+import java.sql.PreparedStatement;
 import java.util.Objects;
 import java.util.Scanner;
 
@@ -48,7 +49,7 @@ public class Foundation extends MakeupProduct{
         return Objects.hash(super.hashCode(), coverage);
     }
 
-    public String getFoundationCoverage() {
-        return
+    public PreparedStatement prepareStatement(String sql) {
+        return null;
     }
 }

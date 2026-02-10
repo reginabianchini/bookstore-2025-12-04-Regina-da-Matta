@@ -14,6 +14,14 @@ public class Lipstick extends MakeupProduct {
 
     }
 
+    public Lipstick(String superLipstick, double v) {
+        super();
+    }
+
+    public Lipstick(String s) {
+        super();
+    }
+
     @Override
     public void sellItem() {
         System.out.println("Selling Lipstick: " + getShade() + "with a " + finish + " finish for " + getPrice());
@@ -51,5 +59,9 @@ public class Lipstick extends MakeupProduct {
         System.out.println("Edit your finish Lipstick [" + this.finish + "]:");
         this.finish = getInput(input,this.finish);
 
+    }
+
+    public MakeupProduct prepareStatement(String sql) {
+    return new Lipstick("");
     }
 }
