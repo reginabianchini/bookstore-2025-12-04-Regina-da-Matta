@@ -1,39 +1,56 @@
 package csd214.bookstore.pojos;
 
+import java.util.Scanner;
+import java.util.UUID;
+
 public class Ticket extends Product {
     public String description = "";
-    public double price = 0.0;
 
+    public Ticket() {
+    }
+
+    public Ticket(String description, double price) {
+        super(UUID.randomUUID().toString(), "Ticket", price);
+        this.description=description;
+    }
+
+    
+    
+    
     @Override
     public void sellItem() {
-        System.out.println("Selling Ticket: " + description + " for " + price);
+        System.out.println("Selling Ticket: " + description + " for " + getPrice());
     }
 
-    @Override
-    public double getPrice() {
-        return price;
-    }
 
     @Override
-    public void initialize() {
+    public void initialize(Scanner input) {
         System.out.println("Enter Description:");
-        this.description = getInput("Ticket");
+        this.description = getInput(input, "Ticket");
 
-        System.out.println("Enter Price:");
-        this.price = getInput(0.0);
+        super.initialize(input);
     }
 
     @Override
-    public void edit() {
+    public void edit(Scanner input) {
         System.out.println("Edit Description [" + this.description + "]:");
-        this.description = getInput(this.description);
+        this.description = getInput(input, this.description);
 
-        System.out.println("Edit Price [" + this.price + "]:");
-        this.price = getInput(this.price);
+        super.edit(input);
     }
 
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    
+    
     @Override
     public String toString() {
-        return "Ticket{desc='" + description + "', price=" + price + "}";
+        return "Ticket{desc='" + description + "', price=" + getPrice() + "}";
     }
 }

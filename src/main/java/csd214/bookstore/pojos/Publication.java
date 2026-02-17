@@ -1,55 +1,38 @@
 package csd214.bookstore.pojos;
 
-import java.util.Objects;
+import java.util.Scanner;
+import java.util.UUID;
 
 public abstract class Publication extends Product {
     private String title = "";
-    private double price = 0.0;
     private int copies = 0;
 
     public Publication() {
     }
 
     public Publication(String title, double price, int copies) {
+        super(UUID.randomUUID().toString(), "publication", price);
         this.title = title;
-        this.price = price;
         this.copies = copies;
     }
 
     @Override
-    public void initialize() {
+    public void initialize(Scanner input) {
+        super.initialize(input);
         System.out.println("Enter Title:");
-        this.title = getInput("Available Title"); // "Available Title" is default if empty
-    }
+        this.title = getInput(input, "Available Title");
 
-    // Helper used by subclasses during initialize
-    protected void initPriceCopies() {
         System.out.println("Enter copies:");
-        this.copies = getInput(0);
-
-        System.out.println("Enter price:");
-        this.price = getInput(0.0);
+        this.copies = getInput(input, 0);
     }
 
-    @Override
-    public void edit() {
+    public void edit(Scanner input) {
+        super.edit(input);
         System.out.println("Edit Title [" + this.title + "]:");
-        this.title = getInput(this.title);
-
-        System.out.println("Edit Price [" + this.price + "]:");
-        this.price = getInput(this.price);
-
+        this.title = getInput(input, this.title);
         System.out.println("Edit Copies [" + this.copies + "]:");
-        this.copies = getInput(this.copies);
-    }
+        this.copies = getInput(input, this.copies);
 
-    @Override
-    public double getPrice() {
-        return price;
-    }
-
-    public void setPrice(double price) {
-        this.price = price;
     }
 
     public String getTitle() {
@@ -67,24 +50,12 @@ public abstract class Publication extends Product {
     public void setCopies(int copies) {
         this.copies = copies;
     }
-
-    @Override
+   @Override
     public String toString() {
-        return "Publication{title='" + title + "', price=" + price + ", copies=" + copies + "}";
+        return "Publication{" +
+                "title='" + title + '\'' +
+                ", copies=" + copies +
+                "} " + super.toString();
     }
 
-    @Override
-    public boolean equals(Object o) {
-        if (this == o) return true;
-        if (!(o instanceof Publication)) return false;
-        Publication that = (Publication) o;
-        return Double.compare(that.price, price) == 0 &&
-                copies == that.copies &&
-                Objects.equals(title, that.title);
-    }
-
-    @Override
-    public int hashCode() {
-        return Objects.hash(title, price, copies);
-    }
 }

@@ -1,7 +1,8 @@
 package csd214.bookstore;
 
-import csd214.bookstore.pojos.*;
 import com.github.javafaker.Faker;
+import csd214.bookstore.pojos.*;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -68,6 +69,8 @@ public class App {
             System.out.println("2. Add Magazine");
             System.out.println("3. Add DiscMag");
             System.out.println("4. Add Ticket");
+            System.out.println("5. Add Pen");
+            System.out.println("6. Add Notebook");
             System.out.println("99. Exit");
 
             try {
@@ -86,11 +89,13 @@ public class App {
                 case 2: item = new Magazine(); break;
                 case 3: item = new DiscMag(); break;
                 case 4: item = new Ticket(); break;
+                case 5: item = new Pen(); break;
+                case 6: item = new Notebook(); break;
                 default: System.out.println("Invalid selection."); continue;
             }
 
             if(item instanceof Editable) {
-                ((Editable)item).initialize();
+                ((Editable)item).initialize(input);
             }
             addItem(item);
         }
@@ -111,6 +116,8 @@ public class App {
             System.out.println("3. Magazines");
             System.out.println("4. DiscMags");
             System.out.println("5. Tickets");
+            System.out.println("6. Pens");
+            System.out.println("7. Notebooks");
             System.out.println("99. Exit");
 
             try {
@@ -130,6 +137,8 @@ public class App {
                 case 3: filter = Magazine.class; break;
                 case 4: filter = DiscMag.class; break;
                 case 5: filter = Ticket.class; break;
+                case 6: filter = Pen.class; break;
+                case 7: filter = Notebook.class; break;
                 default: System.out.println("Invalid selection."); continue;
             }
 
@@ -178,7 +187,7 @@ public class App {
     }
 
     public void editItem(Editable item) {
-        item.edit();
+        item.edit(input);
     }
 
     public void deleteItem() {
@@ -265,7 +274,7 @@ public class App {
             // Ticket
             Ticket t = new Ticket();
             t.description = "Concert: " + faker.rockBand().name();
-            t.price = faker.number().randomDouble(2, 50, 150);
+            t.setPrice(faker.number().randomDouble(2, 50, 150));
             addItem(t);
         }
     }
